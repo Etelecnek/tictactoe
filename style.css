@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(184, 137, 137);
+    padding: 50px;
+    padding-top: 10px;    
+}
+
+.container {
+    padding: 20px;
+    background-color: brown;
+    border-radius: 25px;
+}
+
+.header {
+    min-height: 50px;
+    max-height: 50px;
+    background-color: brown;
+    grid-row: 1;
+    grid-column: 1;
+    text-align: center;
+}
+
+.body {
+    background-color: aliceblue;
+    min-height: 600px;
+    grid-row: 2;
+    grid-column: 1;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr ;
+}
+
+.options {
+    background-color: royalblue;;
+    grid-row: 1/4;
+    grid-column: 1;
+}
+
+.game {
+    background-color: royalblue;;
+    padding: 20px;
+    grid-row: 1/4;
+    grid-column: 2/4;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.message {
+    text-align: center;
+    background-color: brown;
+    min-height: 50px;
+    max-height: 50px;
+    grid-row: 4;
+    grid-column: 1/5;
+}
+
+.top,
+.middle,
+.bottom {
+    background-color: royalblue;
+    border: solid black;
+}
+
+.top {
+    border-top: none;
+}
+
+.bottom {
+    border-bottom: none;
+}
+
+#mlbutton, 
+#tlbutton, 
+#blbutton {
+    border-left: none;
+}
+
+#trbutton,
+#mrbutton,
+#brbutton {
+    border-right: none;
+}
