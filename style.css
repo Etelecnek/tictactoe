@@ -66,6 +66,8 @@ body {
 .bottom {
     background-color: royalblue;
     border: solid black;
+    font-size: 100px;
+    color: royalblue;
 }
 
 .top {
