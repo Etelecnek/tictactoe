@@ -1,79 +1,93 @@
-const markedLocations = [{}]
-let currentplayer = 'player1';
+const markedLocations = [
+    {
+        playerid: '',
+        LocationID: 'tlbutton',       
+    }, 
+    {
+        playerid: '',
+        LocationID: 'tcbutton',
+    }, 
+    {
+        playerid: '',
+        LocationID: 'trbutton',
+    }, 
+    {
+        playerid: '',
+        LocationID: 'mlbutton',
+    }, 
+    {
+        playerid: '',
+        LocationID: 'mcbutton',
+    }, 
+    {
+        playerid: '',
+        LocationID: 'mrbutton',
+    }, 
+    {
+        playerid: '',
+        LocationID: 'blbutton',
 
-const markLocation = (playerid, buttonid) => {
-    return {playerid, buttonid};
+    }, 
+    {
+        playerid: '',
+        LocationID: 'bcbutton',
+    }, 
+    {
+        playerid: '',
+        LocationID: 'brbutton',
+    }
+]
+
+function currentPlayer(player) {
+    return player
 }
 
-function buttonpressed(val, id) {
-    const buttonclicked = markLocation(currentplayer, val)
-    let playerclick = document.getElementById(id)
-    markedLocations.push(buttonclicked)
-    if (currentplayer === 'player1') {
-        playerclick.value="X";
-        playerclick.style.color = 'black';
-    } else {
-        playerclick.value="O";
-        playerclick.style.color = 'black';
-    }
-    playerclick.onclick = null;
-    if (currentplayer === 'player1') {
-        currentplayer = 'player2'
-    } else if (currentplayer === 'player2') {
-        currentplayer = 'player1'
-    }
-    checkWinner()
-}
+let cplayer = 'player1';
 
-let checkWinner = function() {      
-    const player1array = [{}]
-    const player2array = [{}]    
-    markedLocations.find((o) => {
-        if (o.playerid === 'player1') {
-            player1array.push(o.buttonid) 
-                    
-        } else if (o.playerid === "player2") {
-            player2array.push(o.buttonid)            
+function buttonpressed(id) {  
+
+    markedLocations.find(v => v.LocationID === id).playerid = currentPlayer(cplayer);    
+    for (let i = 0; i < markedLocations.length; i++) {        
+        if (markedLocations[i].playerid === 'player1') {
+            let playerclick = document.getElementById(markedLocations[i].LocationID)
+            playerclick.value="X";
+            playerclick.onclick = null;
+        } else if (markedLocations[i].playerid === 'player2') {
+            let playerclick = document.getElementById(markedLocations[i].LocationID)
+            playerclick.value="O";
+            playerclick.onclick = null;
         }
-    })
-    function checkwin(winner) {
-        return winner.every(elem => player1array.includes(elem))
+    }    
+    switch (cplayer) {
+        case 'player1':
+            cplayer = 'player2';
+            break;
+        case 'player2':
+            cplayer = 'player1';
+            break;
     }
-    function checkloss(winner) {
-        return winner.every(elem => player2array.includes(elem))
-    }
-    if (checkwin(['tr', 'tl', 'tc']) === true) {
-        console.log('winner!')
-    } else if (checkwin(['tr', 'mr', 'br'])) {
-        console.log('winner!')
-    } else if (checkwin(['tl', 'ml', 'bl'])) {
-        console.log('winner!')
-    } else if (checkwin(['tc', 'mc', 'bc'])) {
-        console.log('winner!')
-    } else if (checkwin(['mr', 'ml', 'mc'])) {
-        console.log('winner!')
-    } else if (checkwin(['br', 'bl', 'bc'])) {
-        console.log('winner!')
-    } else if (checkwin(['tl', 'mc', 'br'])) {
-        console.log('winner!')
-    }  else if (checkwin(['tr', 'mc', 'bl'])) {
-        console.log('winner!')
-    }
-    if (checkloss(['tr', 'tl', 'tc']) === true) {
-        console.log('loser!')
-    } else if (checkloss(['tr', 'mr', 'br'])) {
-        console.log('loser!')
-    } else if (checkloss(['tl', 'ml', 'bl'])) {
-        console.log('loser!')
-    } else if (checkloss(['tc', 'mc', 'bc'])) {
-        console.log('loser!')
-    } else if (checkloss(['mr', 'ml', 'mc'])) {
-        console.log('loser!')
-    } else if (checkloss(['br', 'bl', 'bc'])) {
-        console.log('loser!')
-    } else if (checkloss(['tl', 'mc', 'br'])) {
-        console.log('loser!')
-    }  else if (checkloss(['tr', 'mc', 'bl'])) {
-        console.log('loser!')
-    }
+    checkWinner(markedLocations)    
 }
+
+function checkWinner(board) {
+    const winningCominations = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ]
+    for (let i = 0; i < winningCominations.length; i++) {
+        const [a, b, c] = winningCominations[i];
+        if (board[a].playerid && board[a].playerid === board[b].playerid && board[a].playerid === board[c].playerid) {
+            alert(board[a].playerid + ' is the winner!')
+            return true;
+        }
+    }
+    return false;
+    
+}
+
