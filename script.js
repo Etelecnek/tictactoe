@@ -38,32 +38,30 @@ const markedLocations = [
     }
 ]
 
-function currentPlayer(player) {
-    return player
-}
+let player1 = 'player1';
+let player2 = 'player2';
+let currentPlayer = player1;
 
-let cplayer = 'player1';
 
-function buttonpressed(id) {  
-
-    markedLocations.find(v => v.LocationID === id).playerid = currentPlayer(cplayer);    
+function buttonpressed(id) {
+    markedLocations.find(v => v.LocationID === id).playerid = currentPlayer;
     for (let i = 0; i < markedLocations.length; i++) {        
-        if (markedLocations[i].playerid === 'player1') {
+        if (markedLocations[i].playerid === player1) {
             let playerclick = document.getElementById(markedLocations[i].LocationID)
-            playerclick.value="X";
-            playerclick.onclick = null;
-        } else if (markedLocations[i].playerid === 'player2') {
+            playerclick.value = "X";
+            playerclick.style.pointerEvents = 'none';
+        } else if (markedLocations[i].playerid === player2) {
             let playerclick = document.getElementById(markedLocations[i].LocationID)
-            playerclick.value="O";
-            playerclick.onclick = null;
+            playerclick.value = "O";
+            playerclick.style.pointerEvents = 'none';
         }
     }    
-    switch (cplayer) {
-        case 'player1':
-            cplayer = 'player2';
+    switch (currentPlayer) {
+        case player1:
+            currentPlayer = player2;
             break;
-        case 'player2':
-            cplayer = 'player1';
+        case player2:
+            currentPlayer = player1;
             break;
     }
     checkWinner(markedLocations)    
@@ -82,12 +80,43 @@ function checkWinner(board) {
     ]
     for (let i = 0; i < winningCominations.length; i++) {
         const [a, b, c] = winningCominations[i];
-        if (board[a].playerid && board[a].playerid === board[b].playerid && board[a].playerid === board[c].playerid) {
-            alert(board[a].playerid + ' is the winner!')
-            return true;
+        if (board[a].playerid && board[a].playerid === board[b].playerid && board[a].playerid === board[c].playerid) {            
+            outcomealert(board[a].playerid)
+            return true;            
         }
     }
-    return false;
-    
+    return false;    
 }
 
+function outcomealert (player) {
+    document.getElementById("message").innerHTML = player + " is the winner!"
+    document.getElementById("outcomealert").style.display="block";
+}
+
+function resetgame() {
+    let gameboardbuttons = document.getElementsByClassName("gameboard");
+    for (let i = 0; i < gameboardbuttons.length; i++) {
+        let buttons = gameboardbuttons[i];
+        buttons.value = "";
+        buttons.style.pointerEvents = 'auto';
+        markedLocations[i].playerid = "";
+    }
+    currentPlayer = player1;
+    document.getElementById("outcomealert").style.display="none";
+}
+
+function submitForm() {
+    event.preventDefault()
+    let formplayer1name = document.querySelector('#player1name').value;
+    let formplayer2name = document.querySelector('#player2name').value;
+    if (formplayer1name === formplayer2name) {
+        alert('Player 1 and Player 2 cannot have the same names')
+    } else {
+        document.getElementById('player1').innerHTML = "Player: " + formplayer1name;
+        document.getElementById('player2').innerHTML = "Player: " + formplayer2name;
+        player1 = formplayer1name;
+        player2 = formplayer2name;
+        currentPlayer = player1;
+        document.getElementById("submitform").style.display="none";
+    }    
+}

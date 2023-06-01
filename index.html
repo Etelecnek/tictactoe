@@ -10,19 +10,34 @@
         <div class="container">
             <div class="header">Tic Tac Toe, three in a row, Barney got shot by a G.I. Joe</div>
             <div class="body">
-                <div class="options"></div>
-                <div class="game">
-                    <input type="button" value="" class="top" id="tlbutton" onclick="buttonpressed(this.id)">
-                    <input type="button" value="" class="top" id="tcbutton" onclick="buttonpressed(this.id)">
-                    <input type="button" value="" class="top" id="trbutton" onclick="buttonpressed(this.id)">
-                    <input type="button" value="" class="middle" id="mlbutton" onclick="buttonpressed(this.id)">
-                    <input type="button" value="" class="middle" id="mcbutton" onclick="buttonpressed(this.id)">
-                    <input type="button" value="" class="middle" id="mrbutton" onclick="buttonpressed(this.id)">
-                    <input type="button" value="" class="bottom" id="blbutton" onclick="buttonpressed(this.id)">
-                    <input type="button" value="" class="bottom" id="bcbutton" onclick="buttonpressed(this.id)">
-                    <input type="button" value="" class="bottom" id="brbutton" onclick="buttonpressed(this.id)">
+                <div class="options">
+                    <div id="submitform">
+                        <form action="" onsubmit="submitForm()">
+                            <input type="text" placeholder="Player 1" id="player1name">
+                            <input type="text" placeholder="Player 2" id="player2name">
+                            <input type="submit" value="Submit" id="submit">
+                        </form>
+                    </div>
+                    <div id="names">
+                        <p id="player1"></p>
+                        <p id="player2"></p>
+                    </div>
                 </div>
-                <div class="message">Game Over</div>
+                <div class="game">
+                    <input type="button" value="" class="gameboard" id="tlbutton" onclick="buttonpressed(this.id)">
+                    <input type="button" value="" class="gameboard" id="tcbutton" onclick="buttonpressed(this.id)">
+                    <input type="button" value="" class="gameboard" id="trbutton" onclick="buttonpressed(this.id)">
+                    <input type="button" value="" class="gameboard" id="mlbutton" onclick="buttonpressed(this.id)">
+                    <input type="button" value="" class="gameboard" id="mcbutton" onclick="buttonpressed(this.id)">
+                    <input type="button" value="" class="gameboard" id="mrbutton" onclick="buttonpressed(this.id)">
+                    <input type="button" value="" class="gameboard" id="blbutton" onclick="buttonpressed(this.id)">
+                    <input type="button" value="" class="gameboard" id="bcbutton" onclick="buttonpressed(this.id)">
+                    <input type="button" value="" class="gameboard" id="brbutton" onclick="buttonpressed(this.id)">
+                </div>
+                <div id="outcomealert">
+                    <p id="message">Game Over</p>
+                    <input type="button" value="Play Again" id="reset" onclick="resetgame()">
+                </div>
             </div>
         </div>
     </body>
